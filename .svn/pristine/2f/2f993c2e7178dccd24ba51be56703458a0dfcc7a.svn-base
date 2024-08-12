@@ -1,0 +1,88 @@
+﻿using System;
+using System.Deployment.Application;
+using System.IO;
+
+namespace NCManagementSystem.Components.Handlers.Publish
+{
+    public class PublishHandler
+    {
+        #region [ Constructor ]
+        private static readonly object m_SyncLock = new object();
+
+        private static PublishHandler m_Instance = null;
+        public static PublishHandler GetInstance()
+        {
+            if (m_Instance == null)
+            {
+                lock (m_SyncLock)
+                {
+                    m_Instance = new PublishHandler();
+                }
+            }
+
+            return m_Instance;
+        }
+
+        public PublishHandler()
+        {
+        }
+        #endregion
+
+        #region [ Member Variables / Fields / Properties / EventHandler ]
+        public Version Version { get; set; }
+        public string FilePath { get; set; }
+        public string FileNames { get; set; }
+        public bool IsDeployed { get; set; } = false;
+        #endregion
+
+        #region [ Override Events / Events / Methods ]
+        public void RunTransferDataFile()
+        {
+            try
+            {
+                if (ApplicationDeployment.IsNetworkDeployed && ApplicationDeployment.CurrentDeployment.IsFirstRun)
+                {
+                    TransferDataFile();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void TransferDataFile()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(FileNames))
+                {
+                    return;
+                }
+
+                string[] _sFileNames = FileNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string _sFileName in _sFileNames)
+                {
+                    string _sPreFullPath = Path.Combine(FilePath, @".pre\" + _sFileName);
+                    if (!File.Exists(_sPreFullPath))
+                    {
+                        break;
+                    }
+
+                    string _sFullPath = Path.Combine(FilePath, _sFileName);
+                    if (File.Exists(_sFullPath))
+                    {
+                        File.Delete(_sFullPath);
+                    }
+
+                    File.Copy(_sPreFullPath, _sFullPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+    }
+}

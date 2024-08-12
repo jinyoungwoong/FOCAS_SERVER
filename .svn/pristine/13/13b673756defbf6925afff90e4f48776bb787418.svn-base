@@ -1,0 +1,257 @@
+﻿using System;
+using System.Collections.Generic;
+using Dapper;
+using NCManagementSystem.Components.Models;
+
+namespace NCManagementSystem.Components.Handlers.DB.Repositories
+{
+    public class RunSQL : BaseRepository
+    {
+        #region [ Constructor ]
+        public RunSQL()
+        {
+        }
+
+        private static readonly object m_SyncLock = new object();
+        public static DateTime stDate;
+        public static bool isRunning = false;
+        private static RunSQL m_Instance = null;
+        public static RunSQL GetInstance()
+        {
+            if (m_Instance == null)
+            {
+                lock (m_SyncLock)
+                {
+                    m_Instance = new RunSQL();
+                }
+            }
+
+            return m_Instance;
+        }
+        #endregion
+
+        #region [ Override Events / Events / Methods ]
+
+        public void setRunningState(bool x)
+        {
+            isRunning = x;
+        }
+
+        public bool getRunningState()
+        {
+            return isRunning;
+        }
+
+        public void setRunningTime(DateTime x)
+        {
+            stDate = x;
+        }
+
+        public DateTime getRunningTime()
+        {
+            return stDate;
+        }
+
+        public bool CountByRecordForMachineMaster(string code)
+        {
+            try
+            {
+                string _sQuery = "SELECT COUNT(*) FROM t_cd_machine WHERE machine_cd=@machine_cd";
+                return ExecuteScalar<int>(_sQuery, new T_CD_MACHINE { MACHINE_CD = code }) > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool ExistsCheckForUserMaster(string code)
+        {
+            try
+            {
+                string _sQuery = "SELECT * FROM \"FOC_V01_USER\" WHERE \"LoginId\"=@id";
+                return ExecuteScalar<int>(_sQuery, new T_CD_USER { ID = code }) > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<T_CD_MACHINE> SelectAllRecordsForMachineMaster()
+        {
+            try
+            {
+                string _sQuery = "SELECT machine_cd, machine_nm, model, ip_adr, port, remarks, emp_cd, created_on, modified_on FROM t_cd_machine ORDER BY machine_cd";
+                return Query<T_CD_MACHINE>(_sQuery);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public List<T_CD_USER> SelectAllRecordsForUserMaster()
+        {
+            try
+            {
+                string _sQuery = "SELECT \"LoginId\" AS ID, \"Password\", \"Name\", TRIM(\"EMAIL\") AS EMAIL, TRIM(\"PHONE\") AS PHONE, \"USE_YN\", \"USER_GBN\" FROM \"FOC_V01_USER\" ORDER BY \"LoginId\"";
+                return Query<T_CD_USER>(_sQuery);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public T_CD_MACHINE SelectByConditionRecordForMachineMaster(string code)
+        {
+            try
+            {
+                string _sQuery = "SELECT machine_cd, machine_nm, model, ip_adr, port, remarks, created_on, modified_on FROM t_cd_machine WHERE machine_cd=@machine_cd";
+                return QueryFirstOrDefault<T_CD_MACHINE>(_sQuery, new T_CD_MACHINE { MACHINE_CD = code });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void InsertRecordForMachineMaster(T_CD_MACHINE model)
+        {
+            try
+            {
+                string _sQuery = "INSERT INTO t_cd_machine (machine_cd, machine_nm, model, ip_adr, port, emp_cd, remarks, created_on, modified_on, starttime, finishtime) VALUES (@machine_cd, @machine_nm, @model, @ip_adr, @port, @emp_cd, @remarks, current_timestamp, current_timestamp, @starttime, @finishtime)";
+                Execute(_sQuery, model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void InsertRecordForUserMaster(T_CD_USER model)
+        {
+            try
+            {
+                string _sQuery = "INSERT INTO \"FOC_V01_USER\" (\"LoginId\", \"Password\", \"Name\", \"EMAIL\", \"PHONE\", \"USE_YN\", \"USER_GBN\",\"CreatedDate\") VALUES (@ID, @PASSWORD, @NAME, @EMAIL, @PHONE, @USE_YN, @USER_GBN, NOW())";
+                Execute(_sQuery, model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateRecordForMachineMaster(T_CD_MACHINE model)
+        {
+            try
+            {
+                string _sQuery = "UPDATE t_cd_machine SET machine_nm=@machine_nm, model=@model, ip_adr=@ip_adr, port=@port, emp_cd = @emp_cd, remarks=@remarks, modified_on=current_timestamp WHERE machine_cd=@machine_cd";
+                Execute(_sQuery, model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateRecordForUserMaster(T_CD_USER model)
+        {
+            try
+            {
+                string _sQuery = "UPDATE \"FOC_V01_USER\" SET \"Password\"=@PASSWORD, \"Name\"=@NAME, \"EMAIL\"=@EMAIL, \"PHONE\"=@PHONE, \"USE_YN\"=@USE_YN, \"USER_GBN\"=@USER_GBN WHERE \"LoginId\"=@ID";
+                Execute(_sQuery, model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteRecordOfMachineMaster(string code)
+        {
+            try
+            {
+                string _sQuery = "DELETE FROM t_cd_machine WHERE machine_cd=@machine_cd";
+                Execute(_sQuery, new T_CD_MACHINE { MACHINE_CD = code });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DeleteRecordOfUserMaster(string code)
+        {
+            try
+            {
+                string _sQuery = "DELETE FROM \"FOC_V01_USER\" WHERE \"LoginId\"=@ID";
+                Execute(_sQuery, new T_CD_USER { ID = code });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpsertRecord(T_NC_STATUS model)
+        {
+            try
+            {
+                using (var _SqlConn = CreateConnection())
+                {
+                    _SqlConn.Open();
+
+                    using (var _Transaction = _SqlConn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string _sQuery = "SELECT MAX(trnx_seq) FROM t_nc_history WHERE machine_cd=@machine_cd";
+                            object _TrnxSeq = _SqlConn.ExecuteScalar(_sQuery, model, _Transaction);
+                            //Console.WriteLine(_Transaction);
+                            if (_TrnxSeq == null || !int.TryParse(_TrnxSeq.ToString(), out int _iTrnxSeq))
+                            {
+                                _iTrnxSeq = 1;
+                            }
+                            else
+                            {
+                                _iTrnxSeq++;
+                            }
+                            _sQuery = $"INSERT INTO t_nc_history (machine_cd, trnx_seq, trnx_time, is_connected, cnc_type, mt_type, series, version, max_axis, axes, addinfo, aut, run, motion, mstb, alarm, prgnum, prgmnum, acts, actf, spload, spindle_data, axis_data, part_count, parts_total, operating_time, cutting_time, cycle_time, created_on, running_time) " +
+                                      $"VALUES (@machine_cd, {_iTrnxSeq}, @trnx_time, @is_connected, @cnc_type, @mt_type, @series, @version, @max_axis, @axes, @addinfo, @aut, @run, @motion, @mstb, @alarm, @prgnum, @prgmnum, @acts, @actf, @spload, @spindle_data, @axis_data, @part_count, @parts_total, @operating_time, @cutting_time, @cycle_time, current_timestamp, @running_time)";
+                            _SqlConn.Execute(_sQuery, model, _Transaction);
+
+                            _sQuery = "SELECT machine_cd, trnx_time, is_connected, cnc_type, mt_type, series, version, max_axis, axes, addinfo, aut, run, motion, mstb, alarm, prgnum, prgmnum, acts, actf, spload, spindle_data, axis_data, part_count, parts_total, operating_time, cutting_time, cycle_time, modified_on FROM t_nc_status WHERE machine_cd=@machine_cd";
+                            T_NC_STATUS _StoredNCStatus = QueryFirstOrDefault<T_NC_STATUS>(_sQuery, new { model.MACHINE_CD });
+                            if (_StoredNCStatus == null)
+                            {
+                                _sQuery = "INSERT INTO t_nc_status (machine_cd, trnx_time, is_connected, cnc_type, mt_type, series, version, max_axis, axes, addinfo, aut, run, motion, mstb, alarm, prgnum, prgmnum, acts, actf, spload, spindle_data, axis_data, part_count, parts_total, operating_time, cutting_time, cycle_time, modified_on, running_time) " +
+                                    "VALUES (@machine_cd, @trnx_time, @is_connected, @cnc_type, @mt_type, @series, @version, @max_axis, @axes, @addinfo, @aut, @run, @motion, @mstb, @alarm, @prgnum, @prgmnum, @acts, @actf, @spload, @spindle_data, @axis_data, @part_count, @parts_total, @operating_time, @cutting_time, @cycle_time, current_timestamp, @running_time)";
+                                _SqlConn.Execute(_sQuery, model, _Transaction);
+                            }
+                            else
+                            {
+                                _sQuery = "UPDATE t_nc_status SET trnx_time=@trnx_time, is_connected=@is_connected, cnc_type=@cnc_type, mt_type=@mt_type, series=@series, version=@version, max_axis=@max_axis, axes=@axes, addinfo=@addinfo, aut=@aut, run=@run, motion=@motion, mstb=@mstb, alarm=@alarm, prgnum=@prgnum, prgmnum=@prgmnum, acts=@acts, actf=@actf, spload=@spload, spindle_data=@spindle_data, axis_data=@axis_data, part_count=@part_count, parts_total=@parts_total, operating_time=@operating_time, cutting_time=@cutting_time, cycle_time=@cycle_time, modified_on=current_timestamp WHERE machine_cd=@machine_cd";
+                                _SqlConn.Execute(_sQuery, model, _Transaction);
+                            }
+
+                            _Transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            _Transaction.Rollback();
+                            throw ex;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+    }
+}

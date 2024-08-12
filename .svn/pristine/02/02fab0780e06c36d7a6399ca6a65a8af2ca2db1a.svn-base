@@ -1,0 +1,296 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using log4net;
+
+namespace NCManagementSystem.Components.Handlers.Log
+{
+    public static class LogHandler
+    {
+        #region [ Member Variables / Fields / Properties / EventHandler ]
+        private static object m_SyncLock = new object();
+        public static string ConfigFile { get; set; } = "log4net.config";
+        private static Type LoggerType;
+        private static Dictionary<string, ILog> Loggers = new Dictionary<string, ILog>();
+        public static bool IsInitialized { get; set; } = false;
+        #endregion
+
+        #region [ Override Events / Events / Methods ]
+        public static void Initialize(Type type)
+        {
+            try
+            {
+                if (!IsInitialized)
+                {
+                    string[] _sFilePaths = Directory.GetFiles(Environment.CurrentDirectory, ConfigFile);
+                    if (!_sFilePaths.Length.Equals(1))
+                    {
+                        throw new Exception($"File not found or invalid.\r\n['{ConfigFile}']");
+                    }
+
+                    LoggerType = type;
+
+                    log4net.Config.XmlConfigurator.Configure(new FileInfo(ConfigFile));
+
+                    IsInitialized = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private static ILog GetLogger(Type type)
+        {
+            try
+            {
+                lock (m_SyncLock)
+                {
+                    if (Loggers.ContainsKey(type.Namespace))
+                    {
+                        return Loggers[type.Namespace];
+                    }
+
+                    ILog _Logger = LogManager.GetLogger(type);
+                    Loggers.Add(type.Namespace, _Logger);
+                    return _Logger;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private static ILog GetLogger(string name)
+        {
+            try
+            {
+                lock (m_SyncLock)
+                {
+                    if (Loggers.ContainsKey(name))
+                    {
+                        return Loggers[name];
+                    }
+
+                    ILog _Logger = LogManager.GetLogger(name);
+                    Loggers.Add(name, _Logger);
+                    return _Logger;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Debug(object msg)
+        {
+            try
+            {
+                Debug(LoggerType, msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Debug(Type type, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || type == null)
+                {
+                    return;
+                }
+
+                GetLogger(type).Debug(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Debug(string name, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || string.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                GetLogger(name).Debug(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Info(object msg)
+        {
+            try
+            {
+                Info(LoggerType, msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Info(Type type, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || type == null)
+                {
+                    return;
+                }
+
+                GetLogger(type).Info(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Info(string name, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || string.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                GetLogger(name).Info(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Warn(object msg)
+        {
+            Warn(LoggerType, msg);
+        }
+
+        public static void Warn(Type type, object msg)
+        {
+            if (!IsInitialized || type == null)
+            {
+                return;
+            }
+
+            GetLogger(type).Warn(msg);
+        }
+
+        public static void Warn(string name, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || string.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                GetLogger(name).Warn(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Error(object msg)
+        {
+            Error(LoggerType, msg);
+        }
+
+        public static void Error(Type type, object msg)
+        {
+            if (!IsInitialized || type == null)
+            {
+                return;
+            }
+
+            GetLogger(type).Error(msg);
+        }
+
+        public static void Error(string name, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || string.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                GetLogger(name).Error(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void Fatal(object msg)
+        {
+            Fatal(LoggerType, msg);
+        }
+
+        public static void Fatal(Type type, object msg)
+        {
+            if (!IsInitialized || type == null)
+            {
+                return;
+            }
+
+            GetLogger(type).Fatal(msg);
+        }
+
+        public static void Fatal(string name, object msg)
+        {
+            try
+            {
+                if (!IsInitialized || string.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                GetLogger(name).Fatal(msg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static string SerializeException(Exception ex)
+        {
+            try
+            {
+                if (ex == null)
+                {
+                    return string.Empty;
+                }
+
+                string _sInnerException = ex.InnerException != null ? $"{Environment.NewLine + ex.InnerException.Message}{ex.InnerException.StackTrace}" : string.Empty;
+                string _sFullMessage = $"{ex.Message}{ex.StackTrace}{_sInnerException}";
+                return _sFullMessage;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
+    }
+}

@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5BEAACF1-1A22-404E-ABC8-0AC0EB769D30}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NCManagementSystem</RootNamespace>
+    <AssemblyName>NCMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <PublishUrl>C:\Projects\NICETECH_SERVER\SetUp\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://kworks.ksolution.kr/Focas/Download/Server_V2/</InstallUrl>
+    <ProductName>NCMS</ProductName>
+    <PublisherName>KSolutions</PublisherName>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Deploy\NCMS\Compile\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Deploy\NCMS\Compile\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\k_logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>6380E75AA1EF65BB3EFF0BD1FDE32E070C894CB3</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NCManagementSystem_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v21.2.Core, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="log4net">
+      <HintPath>..\..\Deploy\Resources\ExternalDLLs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.12\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard1.1\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\ConstsDefiner.cs" />
+    <Compile Include="Components\Controllers\FormAppSettings00.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Controllers\FormAppSettings00.Designer.cs">
+      <DependentUpon>FormAppSettings00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Controllers\FormJoin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Controllers\FormJoin.Designer.cs">
+      <DependentUpon>FormJoin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Controllers\FormControllerSettings01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Controllers\FormControllerSettings01.Designer.cs">
+      <DependentUpon>FormControllerSettings01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Controllers\FormDBSettings00.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Controllers\FormDBSettings00.Designer.cs">
+      <DependentUpon>FormDBSettings00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Controllers\ucController00.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Controllers\ucController00.Designer.cs">
+      <DependentUpon>ucController00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DataMemoryMap.cs" />
+    <Compile Include="Components\Handlers\DB\Repositories\DBStateMonitoringEventDefiner.cs" />
+    <Compile Include="Components\License\DeviceInfo.cs" />
+    <Compile Include="Components\License\FormLicense00.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\License\FormLicense00.Designer.cs">
+      <DependentUpon>FormLicense00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\License\LicenseHandler.cs" />
+    <Compile Include="Components\Protocol\ConstsDefiner.cs" />
+    <Compile Include="Components\Protocol\fwlib32.cs" />
+    <Compile Include="Components\Protocol\TReceivedData.cs" />
+    <Compile Include="FormMain00.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain00.Designer.cs">
+      <DependentUpon>FormMain00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\CheckBox\CheckBoxConstsDefiner.cs" />
+    <Compile Include="Libraries\Controls\CheckBox\FwCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\CheckBox\FwCheckBox.Designer.cs">
+      <DependentUpon>FwCheckBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\ControlConstsDefiner.cs" />
+    <Compile Include="Libraries\Controls\DataGridView\Components\BaseDataModel.cs" />
+    <Compile Include="Libraries\Controls\DataGridView\Components\DataGridViewColumns.cs" />
+    <Compile Include="Libraries\Controls\DataGridView\DataGridViewConstsDefiner.cs" />
+    <Compile Include="Libraries\Controls\DataGridView\FwDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\DataGridView\FwDataGridView.Designer.cs">
+      <DependentUpon>FwDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\DataGridView\FwDataGridViewShell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\DataGridView\FwDataGridViewShell.Designer.cs">
+      <DependentUpon>FwDataGridViewShell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\DataGridView\Renderers\ColumnSchemaRenderer.cs" />
+    <Compile Include="Libraries\Controls\DataGridView\Renderers\HeadersRenderer.cs" />
+    <Compile Include="Libraries\Controls\Forms\FormsConstsDefiner.cs" />
+    <Compile Include="Libraries\Controls\Forms\CircularProgressSplasher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\CircularProgressSplasher.Designer.cs">
+      <DependentUpon>CircularProgressSplasher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\ControlBoxButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\ControlBoxButton.Designer.cs">
+      <DependentUpon>ControlBoxButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\FwSkinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\FwSkinForm.Designer.cs">
+      <DependentUpon>FwSkinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\SkinContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Forms\SkinContainer.Designer.cs">
+      <DependentUpon>SkinContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Label\FwLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Label\FwLabel.Designer.cs">
+      <DependentUpon>FwLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Label\LabelConstsDefiner.cs" />
+    <Compile Include="Libraries\Controls\NativeMethods.cs" />
+    <Compile Include="Libraries\Controls\Panel\FwFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Panel\FwFlowLayoutPanel.Designer.cs">
+      <DependentUpon>FwFlowLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Panel\FwPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Panel\FwPanel.Designer.cs">
+      <DependentUpon>FwPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\Panel\FwTableLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\Panel\FwTableLayoutPanel.Designer.cs">
+      <DependentUpon>FwTableLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\TextBox\FwTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Libraries\Controls\TextBox\FwTextBox.Designer.cs">
+      <DependentUpon>FwTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Controls\TextBox\TextBoxConstsDefiner.cs" />
+    <Compile Include="Components\Helpers\ConfigureBuilder.cs" />
+    <Compile Include="Components\Helpers\ConvertHelper.cs" />
+    <Compile Include="Components\Handlers\DB\Repositories\BaseRepository.cs" />
+    <Compile Include="Components\Handlers\DB\Repositories\RunSQL.cs" />
+    <Compile Include="Components\Handlers\Publish\PublishHandler.cs" />
+    <Compile Include="Components\Handlers\TrayNotify\TrayNotifyHandler.cs" />
+    <Compile Include="Components\Helpers\SizeHelper.cs" />
+    <Compile Include="Components\Controllers\ControllerEventArgs.cs" />
+    <Compile Include="Components\Helpers\SuspendHelper.cs" />
+    <Compile Include="Components\Models\T_CD_MACHINE.cs" />
+    <Compile Include="Components\Models\T_NC_STATUS.cs" />
+    <Compile Include="Components\Handlers\Log\LogHandler.cs" />
+    <Compile Include="Components\Protocol\FocasEventDefiner.cs" />
+    <Compile Include="Components\Protocol\FocasMaster.cs" />
+    <Compile Include="Components\Models\PControllerContent.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NCManagementSystem_1_TemporaryKey.pfx" />
+    <None Include="NCManagementSystem_TemporaryKey.pfx" />
+    <None Include="Resources\License_64W.png" />
+    <None Include="Resources\k_logo.ico" />
+    <None Include="Resources\TitleSymbol1_36W.png" />
+    <None Include="Resources\TitleSymbol1_36D.png" />
+    <None Include="Resources\TitleSymbol_36W.png" />
+    <None Include="Resources\ScrollToBackward_36W.png" />
+    <None Include="Resources\ScrollToBackward_36G.png" />
+    <None Include="Resources\ScrollToBackward_36D.png" />
+    <None Include="Resources\ScrollToBottom_36W.png" />
+    <None Include="Resources\ScrollToBottom_36G.png" />
+    <None Include="Resources\ScrollToBottom_36D.png" />
+    <None Include="Resources\ScrollToTop_36W.png" />
+    <None Include="Resources\ScrollToTop_36G.png" />
+    <None Include="Resources\ScrollToTop_36D.png" />
+    <None Include="Resources\ScrollToForward_36W.png" />
+    <None Include="Resources\ScrollToForward_36G.png" />
+    <None Include="Resources\ScrollToForward_36D.png" />
+    <None Include="Resources\SkipToForward_36W.png" />
+    <None Include="Resources\SkipToForward_36G.png" />
+    <None Include="Resources\SkipToForward_36D.png" />
+    <None Include="Resources\SkipToBackward_36W.png" />
+    <None Include="Resources\SkipToBackward_36G.png" />
+    <None Include="Resources\SkipToBackward_36D.png" />
+    <None Include="Resources\ToForward_36W.png" />
+    <None Include="Resources\ToForward_36G.png" />
+    <None Include="Resources\ToForward_36D.png" />
+    <None Include="Resources\ToBackward_36W.png" />
+    <None Include="Resources\ToBackward_36G.png" />
+    <None Include="Resources\ToBackward_36D.png" />
+    <None Include="Resources\LampOnOff_24W.png" />
+    <None Include="Resources\Settings_24G.png" />
+    <None Include="Resources\Settings_24D.png" />
+    <None Include="Resources\Settings_24W.png" />
+    <None Include="Resources\Settings_36G.png" />
+    <None Include="Resources\Settings_36D.png" />
+    <None Include="Resources\Settings_36W.png" />
+    <None Include="Resources\LampOff_32R.png" />
+    <None Include="Resources\LampOn_32G.png" />
+    <EmbeddedResource Include="Components\Controllers\FormAppSettings00.resx">
+      <DependentUpon>FormAppSettings00.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Controllers\FormJoin.resx">
+      <DependentUpon>FormJoin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Controllers\FormControllerSettings01.resx">
+      <DependentUpon>FormControllerSettings01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Controllers\FormDBSettings00.resx">
+      <DependentUpon>FormDBSettings00.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Controllers\ucController00.resx">
+      <DependentUpon>ucController00.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\License\FormLicense00.resx">
+      <DependentUpon>FormLicense00.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain00.resx">
+      <DependentUpon>FormMain00.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Libraries\Controls\DataGridView\FwDataGridViewShell.resx">
+      <DependentUpon>FwDataGridViewShell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Libraries\Controls\Forms\FwSkinForm.resx">
+      <DependentUpon>FwSkinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Libraries\Controls\Forms\SkinContainer.resx">
+      <DependentUpon>SkinContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="AppConfigure.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fwlib32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fwlibe1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

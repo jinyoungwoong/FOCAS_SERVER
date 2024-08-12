@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="NCManagementSystem.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<probing privatePath="Resources\DLLs"/>
+		</assemblyBinding>
+	</runtime>
+ <userSettings>
+  <NCManagementSystem.Properties.Settings>
+   <setting name="DB_USER" serializeAs="String">
+    <value>postgres</value>
+   </setting>
+   <setting name="DB_PASSWORD" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="LICENSE_KEY" serializeAs="String">
+    <value />
+   </setting>
+   <setting name="CONTROLLER_COUNT" serializeAs="String">
+    <value>10</value>
+   </setting>
+  </NCManagementSystem.Properties.Settings>
+ </userSettings>
+</configuration>
